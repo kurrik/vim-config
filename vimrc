@@ -2,6 +2,7 @@
 colorscheme wombat
 set number
 set ruler
+set gfn=Bitstream\ Vera\ Sans\ Mono:h13
 
 " Highlight trailing spaces
 highlight ExtraWhitespace ctermbg=yellow guibg=yellow
