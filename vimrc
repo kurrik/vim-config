@@ -2,7 +2,13 @@
 colorscheme wombat
 set number
 set ruler
-set gfn=Bitstream\ Vera\ Sans\ Mono:h13
+if has("gui_running")
+  if has("gui_gtk2")
+    set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
+  else
+    set guifont=Bitstream\ Vera\ Sans\ Mono:h13
+  endif
+endif
 
 " Highlight trailing spaces
 highlight ExtraWhitespace ctermbg=yellow guibg=yellow
