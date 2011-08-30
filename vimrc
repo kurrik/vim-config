@@ -19,12 +19,11 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 " Highlight over 80
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
-if has("colorcolumn")
-  set colorcolumn=80
+if exists("+colorcolumn")
+  set colorcolumn=81
 else
-  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+  highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+  match OverLength /\%81v.\+/
 endif
 
 " Tabs and wrapping
@@ -48,4 +47,3 @@ filetype on
 autocmd BufRead,BufNewFile *.go setfiletype go
 autocmd FileType go setlocal noexpandtab shiftwidth=8 softtabstop=8
 autocmd FileType go highlight SpecialKey ctermbg=darkgray guibg=#333333
-
