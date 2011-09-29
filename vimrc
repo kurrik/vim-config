@@ -43,7 +43,28 @@ set backupdir=~/.vim/backup
 " Filetype exceptions
 filetype on
 
-"" Golang
+" Golang
 autocmd BufRead,BufNewFile *.go setfiletype go
 autocmd FileType go setlocal noexpandtab shiftwidth=8 softtabstop=8
 autocmd FileType go highlight SpecialKey ctermbg=darkgray guibg=#333333
+
+" Makefiles
+autocmd FileType make setlocal noexpandtab shiftwidth=8 softtabstop=8
+autocmd FileType make highlight SpecialKey ctermbg=darkgray guibg=#333333
+
+" HTML escapes
+" Usage: visual select lines, execute ctrl+h
+function HtmlEscape()
+  silent s/&/\&amp;/eg
+  silent s/</\&lt;/eg
+  silent s/>/\&gt;/eg
+endfunction
+
+function HtmlUnEscape()
+  silent s/&lt;/</eg
+  silent s/&gt;/>/eg
+  silent s/&amp;/\&/eg
+endfunction
+
+map <silent> <c-h> :call HtmlEscape()<CR>
+map <silent> <c-u> :call HtmlUnEscape()<CR>
