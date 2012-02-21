@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/kurrik/workspace/oauthgo'
+let g:netrw_dirhist_2='/home/kurrik/workspace/golibs/oauth'
+let g:netrw_dirhist_3='/home/kurrik/workspace/misc/school/cs246/hw1'
+let g:netrw_dirhist_4='/home/kurrik/workspace/misc/school/cs246/hw2/q2'
+let g:netrw_dirhist_5='/home/kurrik/workspace/misc/school/cs246/hw2'
+let g:netrw_dirhist_6='/home/kurrik/workspace/misc/school/cs246/hw2/writeup'
+let g:netrw_dirhist_7='/home/kurrik/workspace/misc/school/cs246/hw3/q4'
