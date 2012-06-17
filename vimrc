@@ -9,6 +9,7 @@ if has("gui_running")
     set guifont=Bitstream\ Vera\ Sans\ Mono:h13
   endif
 endif
+let NERDTreeShowHidden=1
 
 " Highlight trailing spaces
 highlight ExtraWhitespace ctermbg=yellow guibg=yellow
