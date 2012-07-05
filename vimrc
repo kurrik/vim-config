@@ -53,9 +53,14 @@ filetype indent on
 autocmd FileType make setlocal noexpandtab shiftwidth=8 softtabstop=8
 autocmd FileType make highlight SpecialKey ctermbg=darkgray guibg=#333333
 
-" Makefiles
+" XML
 autocmd FileType xml setlocal noexpandtab shiftwidth=8 softtabstop=8
 autocmd FileType xml highlight SpecialKey ctermbg=darkgray guibg=#333333
+
+" Ruby
+autocmd FileType rb setlocal expandtab shiftwidth=2 softtabstop=2
+autocmd FileType rb highlight SpecialKey ctermbg=darkgray guibg=#333333
+
 
 " HTML escapes
 " Usage: visual select lines, execute ctrl+h
