@@ -7,3 +7,8 @@ Requirements
 You'll need Bitstream Vera Sans Mono, available from 
 http://www.dafont.com/bitstream-vera-mono.font
 
+You'll need to install Ack for :Ack support:
+  Ubuntu:
+    sudo apt-get install ack-grep
+  OSX:
+    brew install ack
