@@ -10,6 +10,7 @@ if has("gui_running")
   endif
 endif
 let NERDTreeShowHidden=1
+syntax on
 
 " Highlight trailing spaces
 highlight ExtraWhitespace ctermbg=yellow guibg=yellow
