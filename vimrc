@@ -1,5 +1,5 @@
 " Colors and styles
-colorscheme Tomorrow-Night-Bright
+colorscheme Tomorrow-Night-Eighties
 set number
 set ruler
 if has("gui_running")
