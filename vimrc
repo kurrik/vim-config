@@ -1,12 +1,12 @@
 " Colors and styles
-colorscheme Tomorrow-Night
+colorscheme wombat
 set number
 set ruler
 if has("gui_running")
   if has("gui_gtk2")
     set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
   else
-    set guifont=Bitstream\ Vera\ Sans\ Mono:h13
+    set guifont=Monaco:h13
   endif
 endif
 let NERDTreeShowHidden=1
