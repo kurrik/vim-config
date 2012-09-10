@@ -66,6 +66,7 @@ autocmd FileType rb highlight SpecialKey ctermbg=darkgray guibg=#333333
 
 " HTML escapes
 " Usage: visual select lines, execute ctrl+h
+"        Unescape by ctrl+g
 function HtmlEscape()
   silent s/&/\&amp;/eg
   silent s/</\&lt;/eg
@@ -79,4 +80,4 @@ function HtmlUnEscape()
 endfunction
 
 map <silent> <c-h> :call HtmlEscape()<CR>
-map <silent> <c-u> :call HtmlUnEscape()<CR>
+map <silent> <c-g> :call HtmlUnEscape()<CR>
