@@ -1,5 +1,5 @@
 " Colors and styles
-colorscheme wombat
+colorscheme Tomorrow-Night-Bright
 set number
 set ruler
 if has("gui_running")
