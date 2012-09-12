@@ -12,3 +12,8 @@ You'll need to install Ack for :Ack support:
     sudo apt-get install ack-grep
   OSX:
     brew install ack
+
+Thanks
+------
+Tomorrow theme by Chris Kempson
+https://github.com/chriskempson/tomorrow-theme

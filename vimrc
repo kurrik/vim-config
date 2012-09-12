@@ -6,10 +6,11 @@ if has("gui_running")
   if has("gui_gtk2")
     set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
   else
-    set guifont=Bitstream\ Vera\ Sans\ Mono:h13
+    set guifont=Monaco:h13
   endif
 endif
 let NERDTreeShowHidden=1
+syntax on
 
 " Highlight trailing spaces
 highlight ExtraWhitespace ctermbg=yellow guibg=yellow
@@ -69,6 +70,7 @@ autocmd FileType rb highlight SpecialKey ctermbg=darkgray guibg=#333333
 
 " HTML escapes
 " Usage: visual select lines, execute ctrl+h
+"        Unescape by ctrl+g
 function HtmlEscape()
   silent s/&/\&amp;/eg
   silent s/</\&lt;/eg
@@ -82,4 +84,4 @@ function HtmlUnEscape()
 endfunction
 
 map <silent> <c-h> :call HtmlEscape()<CR>
-map <silent> <c-u> :call HtmlUnEscape()<CR>
+map <silent> <c-g> :call HtmlUnEscape()<CR>

@@ -1,3 +1,4 @@
 .*.swp
 vim/swp/*.swp
+vim/swp/*.swo
 vim/.netrwhist
