@@ -61,6 +61,10 @@ filetype indent on
 autocmd FileType make setlocal noexpandtab shiftwidth=8 softtabstop=8
 autocmd FileType make highlight SpecialKey ctermbg=darkgray guibg=#333333
 
+" CPP
+autocmd FileType cpp setlocal noexpandtab shiftwidth=8 softtabstop=8
+autocmd FileType cpp highlight SpecialKey ctermbg=darkgray guibg=#333333
+
 " XML
 autocmd FileType xml setlocal noexpandtab shiftwidth=8 softtabstop=8
 autocmd FileType xml highlight SpecialKey ctermbg=darkgray guibg=#333333
