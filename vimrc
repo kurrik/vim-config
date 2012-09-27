@@ -46,9 +46,15 @@ set backupdir=~/.vim/backup
 filetype on
 
 " Golang
+function Goformat()
+  let regel=line(".")
+  %!gofmt
+  call cursor(regel, 1)
+endfunction
 autocmd BufRead,BufNewFile *.go setfiletype go
 autocmd FileType go setlocal noexpandtab shiftwidth=8 softtabstop=8
 autocmd FileType go highlight SpecialKey ctermbg=darkgray guibg=#333333
+autocmd Filetype go command! Fmt call Goformat()
 filetype indent on
 
 " Makefiles
