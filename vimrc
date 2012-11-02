@@ -73,6 +73,8 @@ autocmd FileType xml highlight SpecialKey ctermbg=darkgray guibg=#333333
 autocmd FileType rb setlocal expandtab shiftwidth=2 softtabstop=2
 autocmd FileType rb highlight SpecialKey ctermbg=darkgray guibg=#333333
 
+" Pig
+autocmd BufRead,BufNewFile *.pig set filetype=pig syntax=pig
 
 " HTML escapes
 " Usage: visual select lines, execute ctrl+h
