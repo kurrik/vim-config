@@ -62,8 +62,8 @@ autocmd FileType make setlocal noexpandtab shiftwidth=8 softtabstop=8
 autocmd FileType make highlight SpecialKey ctermbg=darkgray guibg=#333333
 
 " CPP
-autocmd FileType cpp setlocal noexpandtab shiftwidth=8 softtabstop=8
-autocmd FileType cpp highlight SpecialKey ctermbg=darkgray guibg=#333333
+autocmd FileType cpp setlocal expandtab shiftwidth=2 softtabstop=2
+autocmd FileType cpp highlight SpecialKey ctermbg=yellow guibg=yellow
 
 " XML
 autocmd FileType xml setlocal noexpandtab shiftwidth=8 softtabstop=8
