@@ -66,7 +66,7 @@ autocmd FileType cpp setlocal expandtab shiftwidth=2 softtabstop=2
 autocmd FileType cpp highlight SpecialKey ctermbg=yellow guibg=yellow
 
 " XML
-autocmd FileType xml setlocal noexpandtab shiftwidth=8 softtabstop=8
+autocmd FileType xml setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType xml highlight SpecialKey ctermbg=darkgray guibg=#333333
 
 " Ruby
