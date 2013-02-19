@@ -4,10 +4,11 @@ if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gno
   set t_Co=256
 endif
 
-colorscheme wombat
 set number
 set ruler
+colorscheme wombat256
 if has("gui_running")
+  colorscheme wombat
   if has("gui_gtk2")
     set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
   else
@@ -18,6 +19,10 @@ syntax on
 
 " NERDTree
 let NERDTreeShowHidden=1
+autocmd VimEnter * NERDTree
+autocmd BufEnter * NERDTreeMirror
+autocmd VimEnter * wincmd w
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Highlight trailing spaces
 highlight ExtraWhitespace ctermbg=yellow guibg=yellow
