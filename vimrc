@@ -1,4 +1,9 @@
 " Colors and styles
+
+if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
+  set t_Co=256
+endif
+
 colorscheme wombat
 set number
 set ruler
@@ -9,8 +14,10 @@ if has("gui_running")
     set guifont=Monaco:h13
   endif
 endif
-let NERDTreeShowHidden=1
 syntax on
+
+" NERDTree
+let NERDTreeShowHidden=1
 
 " Highlight trailing spaces
 highlight ExtraWhitespace ctermbg=yellow guibg=yellow
@@ -93,3 +100,11 @@ endfunction
 
 map <silent> <c-h> :call HtmlEscape()<CR>
 map <silent> <c-g> :call HtmlUnEscape()<CR>
+
+" CtrlP
+nmap ; :CtrlP<CR>
+let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_dotfiles = 0
+let g:ctrlp_switch_buffer = 0
+
