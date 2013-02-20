@@ -1,16 +1,16 @@
 " Colors and styles
-
 if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
   set t_Co=256
 endif
 
 set number
 set ruler
-colorscheme wombat256
+syntax on
 
 " Powerline
 let g:Powerline_symbols = 'fancy'
 
+colorscheme wombat256
 if has("gui_running")
   colorscheme wombat
   if has("gui_gtk2")
@@ -19,7 +19,6 @@ if has("gui_running")
     set guifont=Droid\ Sans\ Mono\ for\ Powerline:h14
   endif
 endif
-syntax on
 
 " NERDTree
 let NERDTreeShowHidden=1
@@ -69,7 +68,7 @@ function Goformat()
 endfunction
 autocmd BufRead,BufNewFile *.go setfiletype go
 autocmd FileType go setlocal noexpandtab shiftwidth=8 softtabstop=8
-autocmd FileType go highlight SpecialKey ctermbg=darkgray guibg=#333333
+autocmd FileType go highlight SpecialKey 
 autocmd Filetype go command! Fmt call Goformat()
 filetype indent on
 
@@ -111,9 +110,13 @@ map <silent> <c-h> :call HtmlEscape()<CR>
 map <silent> <c-g> :call HtmlUnEscape()<CR>
 
 " CtrlP
-nmap ; :CtrlP<CR>
+nmap ; :CtrlPBuffer<CR>
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_dotfiles = 0
 let g:ctrlp_switch_buffer = 0
 
+" Powerline
+set laststatus=2
