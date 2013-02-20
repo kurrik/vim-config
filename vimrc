@@ -7,12 +7,16 @@ endif
 set number
 set ruler
 colorscheme wombat256
+
+" Powerline
+let g:Powerline_symbols = 'fancy'
+
 if has("gui_running")
   colorscheme wombat
   if has("gui_gtk2")
-    set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
+    set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 10
   else
-    set guifont=Monaco:h13
+    set guifont=Droid\ Sans\ Mono\ for\ Powerline:h14
   endif
 endif
 syntax on
