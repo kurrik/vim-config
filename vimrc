@@ -16,7 +16,7 @@ if has("gui_running")
   if has("gui_gtk2")
     set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 10
   else
-    set guifont=Droid\ Sans\ Mono\ for\ Powerline:h14
+    set guifont=Monaco\ for\ Powerline:h13
   endif
 endif
 
