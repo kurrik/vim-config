@@ -22,10 +22,13 @@ endif
 
 " NERDTree
 let NERDTreeShowHidden=1
-autocmd VimEnter * NERDTree
-autocmd BufEnter * NERDTreeMirror
-autocmd VimEnter * wincmd w
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" Map Ctrl-n to open/close NERDTree
+map <C-n> :NERDTreeToggle<CR>
+" Uncomment below to open at start.
+" autocmd VimEnter * NERDTree
+" autocmd BufEnter * NERDTreeMirror
+" autocmd VimEnter * wincmd w
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Highlight trailing spaces
 highlight ExtraWhitespace ctermbg=yellow guibg=yellow
@@ -68,7 +71,7 @@ function Goformat()
 endfunction
 autocmd BufRead,BufNewFile *.go setfiletype go
 autocmd FileType go setlocal noexpandtab shiftwidth=8 softtabstop=8
-autocmd FileType go highlight SpecialKey 
+autocmd FileType go highlight SpecialKey
 autocmd Filetype go command! Fmt call Goformat()
 filetype indent on
 
