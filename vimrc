@@ -26,9 +26,9 @@ let NERDTreeShowHidden=1
 map <C-n> :NERDTreeToggle<CR>
 " Uncomment below to open at start.
 " autocmd VimEnter * NERDTree
-" autocmd BufEnter * NERDTreeMirror
-" autocmd VimEnter * wincmd w
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd BufEnter * NERDTreeMirror
+autocmd VimEnter * wincmd w
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Highlight trailing spaces
 highlight ExtraWhitespace ctermbg=yellow guibg=yellow
