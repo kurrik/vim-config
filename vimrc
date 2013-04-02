@@ -21,15 +21,71 @@ if has("gui_running")
 endif
 
 " NERDTree
+" ========
 let NERDTreeShowHidden=1
-" Map Ctrl-n to open/close NERDTree
-map <C-n> :NERDTreeToggle<CR>
 " Uncomment below to open at start.
 " autocmd VimEnter * NERDTree
-autocmd BufEnter * NERDTreeMirror
-autocmd VimEnter * wincmd w
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" autocmd VimEnter * wincmd w
 
+" Some of the Following cribbed from
+" http://superuser.com/questions/195022/vim-how-to-synchronize-nerdtree-with-current-opened-tab-file-path
+
+" Returns true if NERDTree is open
+function! rc:isNTOpen()
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" Returns true iff focused window is NERDTree window
+function! rc:isNTFocused()
+  return -1 != match(expand('%'), 'NERD_')
+endfunction
+
+" calls NERDTreeFind iff NERDTree is active, current window contains a
+" modifiable file, and we're not in vimdiff
+function! rc:syncTree()
+  if &modifiable && rc:isNTOpen() && !rc:isNTFocused() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
+
+" Kill vim if NERDTree is the primary buffer
+function! ark:killIfNTPrimary()
+  if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary")
+    wincmd q
+  endif
+endfunction
+
+" Mirror NERDTree across tabs
+function! ark:mirrorNT()
+  if rc:isNTOpen()
+    NERDTreeMirror
+  endif
+endfunction
+
+" Toggle NERDTree
+function! ark:toggleNT()
+  NERDTreeToggle
+  wincmd p
+  " Call twice to scroll to file.
+  call rc:syncTree()
+  call rc:syncTree()
+endfunction
+
+" Map Ctrl-n to open/close NERDTree
+map <C-n> :call ark:toggleNT()<CR>
+
+" Jump to current buffer in NERDTree if editable
+autocmd BufEnter * call rc:syncTree()
+
+" Mirror trees across tabs
+autocmd BufEnter * call ark:mirrorNT()
+
+" Kill NERDTree if it's the last window
+autocmd BufEnter * call ark:killIfNTPrimary()
+
+" Highlight
+" =========
 " Highlight trailing spaces
 highlight ExtraWhitespace ctermbg=yellow guibg=yellow
 match ExtraWhitespace /\s\+$/
