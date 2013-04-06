@@ -170,6 +170,7 @@ map <silent> <c-g> :call HtmlUnEscape()<CR>
 
 " CtrlP
 nmap ; :CtrlPBuffer<CR>
+nmap \ :CtrlPTag<CR>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
