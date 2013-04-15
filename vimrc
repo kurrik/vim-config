@@ -3,6 +3,7 @@ if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gno
   set t_Co=256
 endif
 
+set mouse=a
 set number
 set ruler
 syntax on
@@ -11,6 +12,9 @@ syntax on
 let g:Powerline_symbols = 'fancy'
 
 colorscheme wombat256
+if $TERM == "screen-256color"
+  colorscheme wombat
+endif
 if has("gui_running")
   colorscheme wombat
   if has("gui_gtk2")
