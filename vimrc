@@ -177,10 +177,12 @@ nmap ; :CtrlPBuffer<CR>
 nmap \ :CtrlPTag<CR>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_dotfiles = 0
 let g:ctrlp_switch_buffer = 0
-
+let g:ctrlp_custom_ignore = {
+  \  'dir':  '\v[\/](\.(git|hg|svn)|build|node_modules)$',
+  \  'file': '\v\.(exe|so|dll|o|swp|pyc)$',
+  \}
 " Powerline
 set laststatus=2
