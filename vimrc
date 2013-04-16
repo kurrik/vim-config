@@ -12,6 +12,9 @@ syntax on
 let g:Powerline_symbols = 'fancy'
 
 colorscheme wombat256
+if $TERM == "screen-256color"
+  colorscheme wombat
+endif
 if has("gui_running")
   colorscheme wombat
   if has("gui_gtk2")
