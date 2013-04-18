@@ -1,6 +1,24 @@
-" Colors and styles
+" Powerline
+let g:Powerline_symbols = 'fancy'
+
+" Colorscheme
+" ===========
 if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
   set t_Co=256
+  colorscheme wombat256kurrik
+else
+  colorscheme wombat
+endif
+
+" GUI where font can be overridden
+if has("gui_running")
+  if has("gui_gtk2")
+    " Linux
+    set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 10
+  else
+    " OSX
+    set guifont=Monaco\ for\ Powerline:h13
+  endif
 endif
 
 set mouse=a
@@ -8,21 +26,6 @@ set number
 set ruler
 syntax on
 
-" Powerline
-let g:Powerline_symbols = 'fancy'
-
-colorscheme wombat256
-if $TERM == "screen-256color"
-  colorscheme wombat
-endif
-if has("gui_running")
-  colorscheme wombat
-  if has("gui_gtk2")
-    set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 10
-  else
-    set guifont=Monaco\ for\ Powerline:h13
-  endif
-endif
 
 " NERDTree
 " ========
@@ -124,7 +127,7 @@ set backupdir=~/.vim/backup
 filetype on
 
 " Golang
-function Goformat()
+function! Goformat()
   let regel=line(".")
   %!gofmt
   call cursor(regel, 1)
@@ -157,13 +160,13 @@ autocmd BufRead,BufNewFile *.pig set filetype=pig syntax=pig
 " HTML escapes
 " Usage: visual select lines, execute ctrl+h
 "        Unescape by ctrl+g
-function HtmlEscape()
+function! HtmlEscape()
   silent s/&/\&amp;/eg
   silent s/</\&lt;/eg
   silent s/>/\&gt;/eg
 endfunction
 
-function HtmlUnEscape()
+function! HtmlUnEscape()
   silent s/&lt;/</eg
   silent s/&gt;/>/eg
   silent s/&amp;/\&/eg
