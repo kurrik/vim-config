@@ -5,7 +5,7 @@ let g:Powerline_symbols = 'fancy'
 " ===========
 if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
   set t_Co=256
-  colorscheme wombat256kurrik
+  colorscheme wombat256
 else
   colorscheme wombat
 endif
@@ -21,6 +21,7 @@ if has("gui_running")
   endif
 endif
 
+set cmdheight=1
 set mouse=a
 set number
 set ruler
@@ -134,7 +135,6 @@ function! Goformat()
 endfunction
 autocmd BufRead,BufNewFile *.go setfiletype go
 autocmd FileType go setlocal noexpandtab shiftwidth=8 softtabstop=8
-autocmd FileType go highlight SpecialKey
 autocmd Filetype go command! Fmt call Goformat()
 filetype indent on
 
@@ -184,8 +184,8 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_dotfiles = 0
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_custom_ignore = {
-  \  'dir':  '\v[\/](\.(git|hg|svn)|build|node_modules)$',
-  \  'file': '\v\.(exe|so|dll|o|swp|pyc)$',
-  \}
+ \  'dir':  '\v[\/](\.(git|hg|svn)|build|node_modules)$',
+ \  'file': '\v\.(exe|so|dll|o|swp|pyc)$'
+ \}
 " Powerline
 set laststatus=2
