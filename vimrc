@@ -129,6 +129,13 @@ else
   match OverLength /\%81v.\+/
 endif
 
+" Misc
+" ====
+
+" Copy and paste from tmux
+" See https://coderwall.com/p/j9wnfw
+set clipboard=unnamed
+
 " Tabs and wrapping
 set list
 set listchars=tab:>-
