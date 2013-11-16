@@ -3,7 +3,7 @@ let g:Powerline_symbols = 'fancy'
 
 " Colorscheme
 " ===========
-if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
+if $TERM == "linux" || $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
   set t_Co=256
   set ttymouse=xterm2
   if has("gui_running")
