@@ -184,8 +184,8 @@ autocmd FileType rb highlight SpecialKey ctermbg=darkgray guibg=#333333
 autocmd BufRead,BufNewFile *.pig set filetype=pig syntax=pig
 
 " Aurora
-autocmd BufRead,BufNewFile *.aurora set filetype=aurora syntax=aurora
-autocmd BufRead,BufNewFile *.mesos set filetype=aurora syntax=aurora
+autocmd BufRead,BufNewFile *.aurora set filetype=python syntax=python
+autocmd BufRead,BufNewFile *.mesos set filetype=python syntax=python
 
 " HTML escapes
 " Usage: visual select lines, execute ctrl+h
