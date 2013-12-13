@@ -22,7 +22,7 @@ if has("gui_running")
     set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 10
   else
     " OSX
-    set guifont=Monaco\ for\ Powerline:h13
+    set guifont=Bitstream\ Vera\ Sans\ Mono\ for\ Powerline:h13
   endif
 endif
 
@@ -182,6 +182,10 @@ autocmd FileType rb highlight SpecialKey ctermbg=darkgray guibg=#333333
 
 " Pig
 autocmd BufRead,BufNewFile *.pig set filetype=pig syntax=pig
+
+" Aurora
+autocmd BufRead,BufNewFile *.aurora set filetype=aurora syntax=aurora
+autocmd BufRead,BufNewFile *.mesos set filetype=aurora syntax=aurora
 
 " HTML escapes
 " Usage: visual select lines, execute ctrl+h
