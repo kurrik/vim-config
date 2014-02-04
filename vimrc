@@ -182,6 +182,7 @@ autocmd FileType rb highlight SpecialKey ctermbg=darkgray guibg=#333333
 
 " Pig
 autocmd BufRead,BufNewFile *.pig set filetype=pig syntax=pig
+autocmd BufRead,BufNewFile *.piglet set filetype=pig syntax=pig
 
 " Aurora
 autocmd BufRead,BufNewFile *.aurora set filetype=python syntax=python
