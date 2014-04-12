@@ -3,7 +3,15 @@ let g:Powerline_symbols = 'fancy'
 
 " Colorscheme
 " ===========
-if $TERM == "cygwin" || $TERM == "linux" || $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
+if $TERM == "cygwin"
+  if has("gui_running")
+    set t_Co=256
+    set ttymouse=xterm2
+    colorscheme wombat256
+  else
+    colorscheme wombat
+  endif
+elseif $TERM == "linux" || $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
   set t_Co=256
   set ttymouse=xterm2
   if has("gui_running")
