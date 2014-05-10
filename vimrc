@@ -3,7 +3,15 @@ let g:Powerline_symbols = 'fancy'
 
 " Colorscheme
 " ===========
-if $TERM == "linux" || $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
+if $TERM == "cygwin"
+  if has("gui_running")
+    set t_Co=256
+    set ttymouse=xterm2
+    colorscheme wombat256
+  else
+    colorscheme wombat
+  endif
+elseif $TERM == "linux" || $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
   set t_Co=256
   set ttymouse=xterm2
   if has("gui_running")
@@ -20,6 +28,9 @@ if has("gui_running")
   if has("gui_gtk2")
     " Linux
     set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 10
+  elseif $TERM == "cygwin"
+    " Windows
+    set guifont=Bitstream_Vera_Sans_Mono_for_Po:h11
   else
     " OSX
     set guifont=Bitstream\ Vera\ Sans\ Mono\ for\ Powerline:h13
@@ -132,6 +143,10 @@ endif
 " Misc
 " ====
 
+" Backspace
+" See http://stackoverflow.com/questions/5419848/
+set backspace=indent,eol,start
+
 " Copy and paste from tmux
 " See https://coderwall.com/p/j9wnfw
 set clipboard=unnamed
@@ -147,8 +162,13 @@ set nowrap
 set textwidth=0
 
 " Directories
-set directory=~/.vim/swp
-set backupdir=~/.vim/backup
+if $TERM == "cygwin"
+  set directory=~/vimfiles/swp
+  set backupdir=~/vimfiles/backup
+else
+  set directory=~/.vim/swp
+  set backupdir=~/.vim/backup
+endif
 
 " Filetype exceptions
 filetype on
