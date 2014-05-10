@@ -153,6 +153,17 @@ set backupdir=~/.vim/backup
 " Filetype exceptions
 filetype on
 
+" JS
+" Install https://github.com/rdio/jsfmt
+function! Jsformat()
+  let regel=line(".")
+  %!jsfmt --format=true
+  call cursor(regel, 1)
+endfunction
+autocmd BufRead,BufNewFile *.js setfiletype javascript
+autocmd FileType javascript setlocal expandtab shiftwidth=2 softtabstop=2
+autocmd Filetype javascript command! Fmt call Jsformat()
+
 " Golang
 function! Goformat()
   let regel=line(".")
