@@ -113,8 +113,8 @@ endfunction
 " Map Ctrl-n to open/close NERDTree
 map <C-n> :call ark:toggleNT()<CR>
 
-" Jump to current buffer in NERDTree if editable
-autocmd BufEnter * call rc:syncTree()
+" Use :FindMe to jump to current buffer in NERDTree if editable
+command! FindMe call rc:syncTree()
 
 " Mirror trees across tabs
 autocmd BufEnter * call ark:mirrorNT()
@@ -180,9 +180,9 @@ function! Jsformat()
   %!jsfmt --format=true
   call cursor(regel, 1)
 endfunction
-autocmd BufRead,BufNewFile *.js setfiletype javascript
+autocmd BufRead,BufNewFile,BufEnter *.js setfiletype javascript
 autocmd FileType javascript setlocal expandtab shiftwidth=2 softtabstop=2
-autocmd Filetype javascript command! Fmt call Jsformat()
+autocmd Filetype javascript command! JsFmt call Jsformat()
 
 " Golang
 function! Goformat()
@@ -190,7 +190,7 @@ function! Goformat()
   %!gofmt
   call cursor(regel, 1)
 endfunction
-autocmd BufRead,BufNewFile *.go setfiletype go
+autocmd BufRead,BufNewFile,BufEnter *.go setfiletype go
 autocmd FileType go setlocal noexpandtab shiftwidth=8 softtabstop=8
 autocmd Filetype go command! Fmt call Goformat()
 filetype indent on
