@@ -1,4 +1,9 @@
+" Line endings (for windows)
+set fileformat=unix
+set fileformats=unix,dos
+
 " Powerline
+set encoding=utf-8
 let g:Powerline_symbols = 'fancy'
 
 " Colorscheme
