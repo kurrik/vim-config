@@ -69,58 +69,58 @@ let NERDTreeShowHidden=1
 " http://superuser.com/questions/195022/vim-how-to-synchronize-nerdtree-with-current-opened-tab-file-path
 
 " Returns true if NERDTree is open
-function! rc:isNTOpen()
+function! s:isNTOpen()
   return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
 endfunction
 
 " Returns true iff focused window is NERDTree window
-function! rc:isNTFocused()
+function! s:isNTFocused()
   return -1 != match(expand('%'), 'NERD_')
 endfunction
 
 " calls NERDTreeFind iff NERDTree is active, current window contains a
 " modifiable file, and we're not in vimdiff
-function! rc:syncTree()
-  if &modifiable && rc:isNTOpen() && !rc:isNTFocused() && strlen(expand('%')) > 0 && !&diff
+function! s:syncTree()
+  if &modifiable && s:isNTOpen() && !s:isNTFocused() && strlen(expand('%')) > 0 && !&diff
     NERDTreeFind
     wincmd p
   endif
 endfunction
 
 " Kill vim if NERDTree is the primary buffer
-function! ark:killIfNTPrimary()
+function! ArkkillIfNTPrimary()
   if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary")
     wincmd q
   endif
 endfunction
 
 " Mirror NERDTree across tabs
-function! ark:mirrorNT()
-  if rc:isNTOpen()
+function! ArkmirrorNT()
+  if s:isNTOpen()
     NERDTreeMirror
   endif
 endfunction
 
 " Toggle NERDTree
-function! ark:toggleNT()
+function! ArktoggleNT()
   NERDTreeToggle
   wincmd p
   " Call twice to scroll to file.
-  call rc:syncTree()
-  call rc:syncTree()
+  call RcsyncTree()
+  call RcsyncTree()
 endfunction
 
 " Map Ctrl-n to open/close NERDTree
-map <C-n> :call ark:toggleNT()<CR>
+map <C-n> :call ArktoggleNT()<CR>
 
 " Use :FindMe to jump to current buffer in NERDTree if editable
-command! FindMe call rc:syncTree()
+command! FindMe call s:syncTree()
 
 " Mirror trees across tabs
-autocmd BufEnter * call ark:mirrorNT()
+autocmd BufEnter * call ArkmirrorNT()
 
 " Kill NERDTree if it's the last window
-autocmd BufEnter * call ark:killIfNTPrimary()
+autocmd BufEnter * call ArkkillIfNTPrimary()
 
 " Highlight
 " =========
