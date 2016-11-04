@@ -93,39 +93,39 @@ function! s:syncTree()
 endfunction
 
 " Kill vim if NERDTree is the primary buffer
-function! ArkkillIfNTPrimary()
+function! s:arkKillIfNTPrimary()
   if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary")
     wincmd q
   endif
 endfunction
 
 " Mirror NERDTree across tabs
-function! ArkmirrorNT()
+function! a:arkMirrorNT()
   if s:isNTOpen()
     NERDTreeMirror
   endif
 endfunction
 
 " Toggle NERDTree
-function! ArktoggleNT()
+function! s:arkToggleNT()
   NERDTreeToggle
   wincmd p
   " Call twice to scroll to file.
-  call RcsyncTree()
-  call RcsyncTree()
+  call s:syncTree()
+  call s:syncTree()
 endfunction
 
 " Map Ctrl-n to open/close NERDTree
-map <C-n> :call ArktoggleNT()<CR>
+map <C-n> :call s:arkToggleNT()<CR>
 
 " Use :FindMe to jump to current buffer in NERDTree if editable
 command! FindMe call s:syncTree()
 
 " Mirror trees across tabs
-autocmd BufEnter * call ArkmirrorNT()
+autocmd BufEnter * call s:arkMirrorNT()
 
 " Kill NERDTree if it's the last window
-autocmd BufEnter * call ArkkillIfNTPrimary()
+autocmd BufEnter * call s:arkKillIfNTPrimary()
 
 " Highlight
 " =========
