@@ -100,7 +100,7 @@ function! s:arkKillIfNTPrimary()
 endfunction
 
 " Mirror NERDTree across tabs
-function! a:arkMirrorNT()
+function! s:arkMirrorNT()
   if s:isNTOpen()
     NERDTreeMirror
   endif
