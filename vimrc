@@ -74,58 +74,58 @@ let NERDTreeShowHidden=1
 " http://superuser.com/questions/195022/vim-how-to-synchronize-nerdtree-with-current-opened-tab-file-path
 
 " Returns true if NERDTree is open
-function! ark:isNTOpen()
+function! ARKisNTOpen()
   return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
 endfunction
 
 " Returns true iff focused window is NERDTree window
-function! ark:isNTFocused()
+function! ARKisNTFocused()
   return -1 != match(expand('%'), 'NERD_')
 endfunction
 
 " calls NERDTreeFind iff NERDTree is active, current window contains a
 " modifiable file, and we're not in vimdiff
-function! ark:syncTree()
-  if &modifiable && ark:isNTOpen() && !ark:isNTFocused() && strlen(expand('%')) > 0 && !&diff
+function! ARKsyncTree()
+  if &modifiable && ARKisNTOpen() && !ARKisNTFocused() && strlen(expand('%')) > 0 && !&diff
     NERDTreeFind
     wincmd p
   endif
 endfunction
 
 " Kill vim if NERDTree is the primary buffer
-function! ark:killIfNTPrimary()
+function! ARKkillIfNTPrimary()
   if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary")
     wincmd q
   endif
 endfunction
 
 " Mirror NERDTree across tabs
-function! ark:mirrorNT()
-  if ark:isNTOpen()
+function! ARKmirrorNT()
+  if ARKisNTOpen()
     NERDTreeMirror
   endif
 endfunction
 
 " Toggle NERDTree
-function! ark:toggleNT()
+function! ARKtoggleNT()
   NERDTreeToggle
   wincmd p
   " Call twice to scroll to file.
-  call ark:syncTree()
-  call ark:syncTree()
+  call ARKsyncTree()
+  call ARKsyncTree()
 endfunction
 
 " Map Ctrl-n to open/close NERDTree
-map <C-n> :call ark:toggleNT()<CR>
+map <C-n> :call ARKtoggleNT()<CR>
 
 " Use :FindMe to jump to current buffer in NERDTree if editable
-command! FindMe call ark:syncTree()
+command! FindMe call ARKsyncTree()
 
 " Mirror trees across tabs
-autocmd BufEnter * call ark:mirrorNT()
+autocmd BufEnter * call ARKmirrorNT()
 
 " Kill NERDTree if it's the last window
-autocmd BufEnter * call ark:killIfNTPrimary()
+autocmd BufEnter * call ARKkillIfNTPrimary()
 
 " Highlight
 " =========
