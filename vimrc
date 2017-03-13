@@ -224,6 +224,9 @@ autocmd BufRead,BufNewFile *.piglet set filetype=pig syntax=pig
 autocmd BufRead,BufNewFile *.aurora set filetype=python syntax=python
 autocmd BufRead,BufNewFile *.mesos set filetype=python syntax=python
 
+" LaTeX
+autocmd FileType tex setlocal spell spelllang=en_us
+
 " HTML escapes
 " Usage: visual select lines, execute ctrl+h
 "        Unescape by ctrl+g
