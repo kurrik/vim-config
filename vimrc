@@ -253,9 +253,11 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_dotfiles = 0
 let g:ctrlp_switch_buffer = 0
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""' " Needs the_silver_searcher!
 let g:ctrlp_custom_ignore = {
  \  'dir':  '\v[\/](\.(git|hg|svn)|build|node_modules)$',
  \  'file': '\v\.(exe|so|dll|o|swp|pyc)$'
  \}
+
 " Powerline
 set laststatus=2
