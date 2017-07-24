@@ -255,9 +255,9 @@ let g:ctrlp_dotfiles = 0
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""' " Needs the_silver_searcher!
 let g:ctrlp_custom_ignore = {
- \  'dir':  '\v[\/](\.(git|hg|svn)|build|node_modules)$',
- \  'file': '\v\.(exe|so|dll|o|swp|pyc)$'
- \}
+  \  'dir':  '\v[\/](\.(git|hg|svn)|build|node_modules)$',
+  \  'file': '\v\.(exe|so|dll|o|swp|pyc)$'
+  \}
 
 " Powerline
 set laststatus=2
@@ -276,3 +276,6 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_ruby_checkers = ['rubocop']
+let g:syntastic_mode_map = {
+  \ "mode": "active",
+  \ "passive_filetypes": ["tex"] }
