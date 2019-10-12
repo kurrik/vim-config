@@ -227,6 +227,10 @@ autocmd BufRead,BufNewFile *.mesos set filetype=python syntax=python
 " LaTeX
 autocmd FileType tex setlocal spell spelllang=en_us
 
+" Typescript
+autocmd BufRead,BufNewFile,BufEnter *.ts setfiletype typescript
+autocmd FileType typescript setlocal expandtab shiftwidth=2 softtabstop=2
+
 " HTML escapes
 " Usage: visual select lines, execute ctrl+h
 "        Unescape by ctrl+g
