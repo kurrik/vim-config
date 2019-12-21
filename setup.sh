@@ -1,15 +1,38 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 
-DIR="$( cd "$( dirname "$0" )" && pwd )"
+ROOT=$(git rev-parse --show-toplevel)
+TS=$(date "+%s")
+CONFIG_ROOT=${XDG_CONFIG_HOME:-$HOME/.config}
 
-rm -rf ~/.vim
-rm -rf ~/.vimrc
+function backup {
+	FILE=$1
+	BACKUP=$1.backup-$TS
+	if [[ -a $FILE ]]; then
+		echo "Backing up $FILE to $BACKUP"
+		mv $FILE $BACKUP
+	else
+		echo "Could not find $FILE, skipping..."
+	fi
+}
+
+function link {
+	SRC=$1
+	DST=$2
+	echo "Linking $SRC to $DST"
+	ln -s $SRC $DST
+}
+
+mkdir -p $CONFIG_ROOT
+
+backup ~/.vim
+backup ~/.vimrc
+backup $CONFIG_ROOT/nvim
 
 echo 'Creating symlinks'
-ln -s $DIR/vim ~/.vim
-ln -s $DIR/vimrc ~/.vimrc
+link $ROOT/nvim ~/.vim
+link $ROOT/nvim/init.vim ~/.vimrc
+link $ROOT/nvim $CONFIG_ROOT/nvim
 
 echo 'Creating dirs'
-mkdir -p ~/.vim/swp
-mkdir -p ~/.vim/backup
-
+mkdir -p ~/.tmp/nvim/swp
+mkdir -p ~/.tmp/nvim/backup
