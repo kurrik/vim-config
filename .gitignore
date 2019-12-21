@@ -8,3 +8,4 @@ vim/.netrwhist
 .vim/swp/*.swo
 .vim/.netrwhist
 .vim/init.vim
+nvim/plugged
