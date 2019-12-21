@@ -5,21 +5,21 @@ TS=$(date "+%s")
 CONFIG_ROOT=${XDG_CONFIG_HOME:-$HOME/.config}
 
 function backup {
-	FILE=$1
-	BACKUP=$1.backup-$TS
-	if [[ -a $FILE ]]; then
-		echo "Backing up $FILE to $BACKUP"
-		mv $FILE $BACKUP
-	else
-		echo "Could not find $FILE, skipping..."
-	fi
+  FILE=$1
+  BACKUP=$1.backup-$TS
+  if [[ -a $FILE ]]; then
+    echo "Backing up $FILE to $BACKUP"
+    mv $FILE $BACKUP
+  else
+    echo "Could not find $FILE, skipping..."
+fi
 }
 
 function link {
-	SRC=$1
-	DST=$2
-	echo "Linking $SRC to $DST"
-	ln -s $SRC $DST
+  SRC=$1
+  DST=$2
+  echo "Linking $SRC to $DST"
+  ln -s $SRC $DST
 }
 
 mkdir -p $CONFIG_ROOT
