@@ -41,9 +41,8 @@ set backupdir=~/.tmp/nvim/backup
 
 " ### Vim: Terminals
 " Move into insert mode when entering a terminal.
-autocmd BufWinEnter,WinEnter * if &buftype == 'terminal' | silent! normal i | endif
 autocmd TermOpen * startinsert
-
+autocmd BufEnter term://* startinsert
 " Move into normal mode when leaving a terminal.
 autocmd BufLeave term://* stopinsert
 
@@ -102,3 +101,18 @@ set incsearch
 " ### Editing: File Types
 filetype on
 syntax enable
+
+" ### Editing: File browser
+" No banner.
+let g:netrw_banner = 0
+" View type (use i to cycle through views).
+let g:netrw_liststyle = 3
+" Open files in previous window.
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+" Size of the browser in pct.
+let g:netrw_winsize = 25
+" 
+" Open / close browser with Ctrl-n
+map <C-n> :Vexplore<CR>
+" Use :FindMe
