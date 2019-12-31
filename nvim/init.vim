@@ -102,6 +102,17 @@ set incsearch
 filetype on
 syntax enable
 
+"### Lang: Go
+function! Goformat()
+  let regel=line(".")
+  %!gofmt
+  call cursor(regel, 1)
+endfunction
+autocmd BufRead,BufNewFile,BufEnter *.go setfiletype go
+autocmd FileType go setlocal noexpandtab shiftwidth=8 softtabstop=8
+autocmd Filetype go command! Fmt call Goformat()
+filetype indent on
+
 " ### Editing: File browser
 " No banner.
 let g:netrw_banner = 0
