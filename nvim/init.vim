@@ -3,6 +3,7 @@ scriptencoding utf-8
 " ### vim-plug: Package manager
 " See https://github.com/junegunn/vim-plug
 " Automatically download vim-plug, if not present.
+" Run :PlugInstall to get new plugins!
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   echo 'vim-plug not installed, downloading'
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -14,11 +15,15 @@ endif
 " ### Plugins: Start
 call plug#begin()
 
-" Monokai color scheme https://vimawesome.com/plugin/vim-monokai-the-story-of-us.
+" Monokai color scheme - https://vimawesome.com/plugin/vim-monokai-the-story-of-us.
 Plug 'sickill/vim-monokai'
 
 " Syntax highlighting for a ton of languages.
 Plug 'sheerun/vim-polyglot'
+
+" File tree - https://github.com/kyazdani42/nvim-tree.lua
+Plug 'kyazdani42/nvim-web-devicons' " for file icons
+Plug 'kyazdani42/nvim-tree.lua'
 
 " ### Plugins: End
 call plug#end()
@@ -80,7 +85,8 @@ set shiftwidth=2
 set expandtab
 " Don't wrap long lines.
 set nowrap
-set textwidth=0
+" Set width for formatting long blocks of text (e.g. gq)
+set textwidth=80
 
 " ### Editing: Keys
 " Press `jj` quickly to get out of edit mode. 
@@ -113,17 +119,13 @@ autocmd FileType go setlocal noexpandtab shiftwidth=8 softtabstop=8
 autocmd Filetype go command! Fmt call Goformat()
 filetype indent on
 
-" ### Editing: File browser
-" No banner.
-let g:netrw_banner = 0
-" View type (use i to cycle through views).
-let g:netrw_liststyle = 3
-" Open files in previous window.
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-" Size of the browser in pct.
-let g:netrw_winsize = 25
-" 
-" Open / close browser with Ctrl-n
-map <C-n> :Vexplore<CR>
-" Use :FindMe
+"### Plugins: LuaTree - https://github.com/kyazdani42/nvim-tree.lua
+let g:lua_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
+let g:lua_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
+
+nnoremap <C-n> :LuaTreeToggle<CR>
+nnoremap <leader>r :LuaTreeRefresh<CR>
+nnoremap <leader>n :LuaTreeFindFile<CR>
+" LuaTreeOpen and LuaTreeClose are also available if you need them
+
+set termguicolors " this variable must be enabled for colors to be applied properly
