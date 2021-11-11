@@ -17,7 +17,8 @@ You'll need to install Ack for :Ack support:
     brew install ack
 
 If you want Terminal to use Monaco correctly, then:
-fontforge -script vim/fontpatcher/fontpatcher /System/Library/Fonts/Monaco.dfont
+  brew install fontforge
+  fontforge -script vim/fontpatcher/fontpatcher /System/Library/Fonts/Monaco.dfont
 
 Thanks
 ------
