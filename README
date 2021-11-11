@@ -4,6 +4,9 @@ Just clone somewhere and then run setup.sh
 
 Requirements
 ------------
+Need `nvim`, of course:
+  brew install nvim
+
 You'll need Bitstream Vera Sans Mono, available from 
 http://www.dafont.com/bitstream-vera-mono.font
 
