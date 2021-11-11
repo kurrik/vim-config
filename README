@@ -2,6 +2,8 @@ Installation
 ------------
 Just clone somewhere and then run setup.sh
 
+Then run `nvim` and run `:PlugInstall`.
+
 Requirements
 ------------
 Need `nvim`, of course:
