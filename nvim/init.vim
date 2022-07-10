@@ -89,7 +89,7 @@ set nowrap
 set textwidth=80
 
 " ### Editing: Keys
-" Press `jj` quickly to get out of edit mode. 
+" Press `jj` quickly to get out of edit mode.
 imap jj <Esc>
 
 " ### Editing: Settings
@@ -119,13 +119,35 @@ autocmd FileType go setlocal noexpandtab shiftwidth=8 softtabstop=8
 autocmd Filetype go command! Fmt call Goformat()
 filetype indent on
 
-"### Plugins: LuaTree - https://github.com/kyazdani42/nvim-tree.lua
-let g:lua_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
-let g:lua_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
+"### Plugins: NvimTree - https://github.com/kyazdani42/nvim-tree.lua
+lua << EOF
+  require("nvim-tree").setup({
+    sort_by = "case_sensitive",
+    view = {
+      adaptive_size = true,
+      mappings = {
+        list = {
+          { key = "u", action = "dir_up" },
+        },
+      },
+    },
+    renderer = {
+      group_empty = true,
+    },
+    filters = {
+      dotfiles = false,
+    },
+    update_focused_file = {
+      enable = true,
+      update_root = false,
+      ignore_list = {},
+    },
+  })
+EOF
 
-nnoremap <C-n> :LuaTreeToggle<CR>
-nnoremap <leader>r :LuaTreeRefresh<CR>
-nnoremap <leader>n :LuaTreeFindFile<CR>
-" LuaTreeOpen and LuaTreeClose are also available if you need them
+nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
+" NvimTreeOpen and NvimTreeClose are also available if you need them
 
 set termguicolors " this variable must be enabled for colors to be applied properly
