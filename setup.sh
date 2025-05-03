@@ -1,38 +1,26 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
+# setup.sh: Backup and symlink Neovim/Vim config
+set -e
+REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
+BACKUP_DIR="$REPO_DIR/.backup_$(date +%Y%m%d_%H%M%S)"
+mkdir -p "$BACKUP_DIR"
 
-ROOT=$(git rev-parse --show-toplevel)
-TS=$(date "+%s")
-CONFIG_ROOT=${XDG_CONFIG_HOME:-$HOME/.config}
-
-function backup {
-  FILE=$1
-  BACKUP=$1.backup-$TS
-  if [[ -a $FILE ]]; then
-    echo "Backing up $FILE to $BACKUP"
-    mv $FILE $BACKUP
-  else
-    echo "Could not find $FILE, skipping..."
+# Backup and symlink Neovim config
+if [ -d "$HOME/.config/nvim" ] || [ -f "$HOME/.config/nvim/init.lua" ]; then
+  mv "$HOME/.config/nvim" "$BACKUP_DIR/nvim_$(date +%s)" 2>/dev/null || true
 fi
-}
+mkdir -p "$HOME/.config"
+ln -sf "$REPO_DIR/nvim" "$HOME/.config/nvim"
 
-function link {
-  SRC=$1
-  DST=$2
-  echo "Linking $SRC to $DST"
-  ln -s $SRC $DST
-}
+# Backup and symlink Vim config
+if [ -f "$HOME/.vimrc" ]; then
+  mv "$HOME/.vimrc" "$BACKUP_DIR/vimrc_$(date +%s)" || true
+fi
+ln -sf "$REPO_DIR/nvim/init.lua" "$HOME/.vimrc"
 
-mkdir -p $CONFIG_ROOT
+if [ -d "$HOME/.vim" ]; then
+  mv "$HOME/.vim" "$BACKUP_DIR/vim_$(date +%s)" || true
+fi
+ln -sf "$REPO_DIR/nvim" "$HOME/.vim"
 
-backup ~/.vim
-backup ~/.vimrc
-backup $CONFIG_ROOT/nvim
-
-echo 'Creating symlinks'
-link $ROOT/nvim ~/.vim
-link $ROOT/nvim/init.vim ~/.vimrc
-link $ROOT/nvim $CONFIG_ROOT/nvim
-
-echo 'Creating dirs'
-mkdir -p ~/.tmp/nvim/swp
-mkdir -p ~/.tmp/nvim/backup
+echo "Backups stored in $BACKUP_DIR. Symlinks created for Neovim and Vim config."

@@ -1,12 +1,2 @@
-.*.swp
-vim/swp/*.swp
-vim/swp/*.swo
-vim/.netrwhist
 .DS_Store
-*.cache
-.vim/swp/*.swp
-.vim/swp/*.swo
-.vim/.netrwhist
-.vim/init.vim
-nvim/plugged
-nvim/.netrwhist
+.backup_*
