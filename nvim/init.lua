@@ -6,11 +6,15 @@ vim.g.mapleader = " "
 local is_nvim = vim.fn.has("nvim") == 1
 local is_vim = not is_nvim
 
--- Theme selection (edit this variable to swap themes)
-local theme = "catppuccin" -- options: "catppuccin", "gruvbox"
+-- Theme selection (edit these variables to swap themes or background)
+local theme = "gruvbox" -- options: "catppuccin", "gruvbox"
+local theme_background = "light" -- options: "dark", "light" (only applies to gruvbox)
 
 -- Shared settings (applies to both Vim and Neovim)
 vim.opt.number = true
+
+-- Map <Esc> in terminal mode to exit to normal mode
+vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
 vim.opt.relativenumber = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -64,8 +68,10 @@ if is_nvim then
 
   -- Theme setup
   if theme == "catppuccin" then
+    vim.opt.background = "dark" -- catppuccin is dark only
     vim.cmd.colorscheme("catppuccin")
   elseif theme == "gruvbox" then
+    vim.opt.background = theme_background -- set to "dark" or "light"
     vim.cmd.colorscheme("gruvbox")
   end
 
