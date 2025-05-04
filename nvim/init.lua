@@ -35,6 +35,26 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.scrolloff = 4
 
+-- :Spterminal - split window and open terminal in bottom split
+vim.api.nvim_create_user_command('Spterminal', function()
+  vim.cmd('split')
+  vim.cmd('wincmd j')
+  vim.cmd('terminal')
+  vim.cmd('startinsert')
+end, {})
+
+-- <leader>t: If in terminal buffer, close it; otherwise, open split terminal
+local function toggle_spterminal()
+  local buftype = vim.api.nvim_get_option_value('buftype', {buf=0})
+  if buftype == 'terminal' then
+    vim.cmd('bdelete!')
+  else
+    vim.cmd('Spterminal')
+  end
+end
+
+vim.keymap.set('n', '<leader>t', toggle_spterminal, { noremap = true, silent = true, desc = 'Toggle Split Terminal' })
+
 -- Only load plugins if running in Neovim
 if is_nvim then
   -- Bootstrap lazy.nvim if not installed
