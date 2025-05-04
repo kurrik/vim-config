@@ -38,6 +38,16 @@
 - Spell check
 - Smart case/incremental search
 - Persistent undo
+
+## Opening a Terminal in Neovim
+
+Neovim includes a built-in terminal emulator. To open a terminal window within your Neovim session, use the command:
+
+```
+:terminal
+```
+
+This will open a terminal buffer where you can run shell commands directly. You can open multiple terminal buffers as needed. To return to normal mode from the terminal, press `<C-\><C-n>`.
 - Always show signcolumn
 - Show matching parentheses
 - Auto-read changed files
