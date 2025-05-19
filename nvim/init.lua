@@ -1,39 +1,13 @@
+-- Neovim configuration
+-- Load shared settings
+vim.cmd('source ~/workspace/vim-config/shared/basic.vim')
+
+-- Neovim-specific settings
 vim.g.mapleader = " "
-
--- Neovim/Vim config entry point
--- Loads settings, plugins, and theme based on user preference
-
-local is_nvim = vim.fn.has("nvim") == 1
-local is_vim = not is_nvim
 
 -- Theme selection (edit these variables to swap themes or background)
 local theme = "gruvbox" -- options: "catppuccin", "gruvbox"
 local theme_background = "light" -- options: "dark", "light" (only applies to gruvbox)
-
--- Shared settings (applies to both Vim and Neovim)
-vim.opt.number = true
-
--- Map <Esc> in terminal mode to exit to normal mode
-vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
-vim.opt.relativenumber = true
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
-vim.opt.fileformats = {"unix"}
-vim.opt.mouse = "a"
-vim.opt.clipboard = "unnamedplus"
-vim.opt.spell = true
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.incsearch = true
-vim.opt.undofile = true
-vim.opt.signcolumn = "yes"
-vim.opt.showmatch = true
-vim.opt.autoread = true
-vim.opt.timeoutlen = 400
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.scrolloff = 4
 
 -- :Spterminal - split window and open terminal in bottom split
 vim.api.nvim_create_user_command('Spterminal', function()
