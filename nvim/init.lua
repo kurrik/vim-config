@@ -6,11 +6,15 @@ vim.g.mapleader = " "
 local is_nvim = vim.fn.has("nvim") == 1
 local is_vim = not is_nvim
 
--- Theme selection (edit this variable to swap themes)
-local theme = "catppuccin" -- options: "catppuccin", "gruvbox"
+-- Theme selection (edit these variables to swap themes or background)
+local theme = "gruvbox" -- options: "catppuccin", "gruvbox"
+local theme_background = "light" -- options: "dark", "light" (only applies to gruvbox)
 
 -- Shared settings (applies to both Vim and Neovim)
 vim.opt.number = true
+
+-- Map <Esc> in terminal mode to exit to normal mode
+vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
 vim.opt.relativenumber = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -30,6 +34,26 @@ vim.opt.timeoutlen = 400
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.scrolloff = 4
+
+-- :Spterminal - split window and open terminal in bottom split
+vim.api.nvim_create_user_command('Spterminal', function()
+  vim.cmd('split')
+  vim.cmd('wincmd j')
+  vim.cmd('terminal')
+  vim.cmd('startinsert')
+end, {})
+
+-- <leader>t: If in terminal buffer, close it; otherwise, open split terminal
+local function toggle_spterminal()
+  local buftype = vim.api.nvim_get_option_value('buftype', {buf=0})
+  if buftype == 'terminal' then
+    vim.cmd('bdelete!')
+  else
+    vim.cmd('Spterminal')
+  end
+end
+
+vim.keymap.set('n', '<leader>t', toggle_spterminal, { noremap = true, silent = true, desc = 'Toggle Split Terminal' })
 
 -- Only load plugins if running in Neovim
 if is_nvim then
@@ -64,8 +88,10 @@ if is_nvim then
 
   -- Theme setup
   if theme == "catppuccin" then
+    vim.opt.background = "dark" -- catppuccin is dark only
     vim.cmd.colorscheme("catppuccin")
   elseif theme == "gruvbox" then
+    vim.opt.background = theme_background -- set to "dark" or "light"
     vim.cmd.colorscheme("gruvbox")
   end
 
