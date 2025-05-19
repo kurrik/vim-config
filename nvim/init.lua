@@ -1,9 +1,10 @@
--- Neovim configuration
--- Load shared settings
-vim.cmd('source ~/workspace/vim-config/shared/basic.vim')
+-- Neovim configuration entry point
 
 -- Neovim-specific settings
 vim.g.mapleader = " "
+
+-- Load shared settings (Vimscript)
+vim.cmd('source ~/workspace/vim-config/shared/basic.vim')
 
 -- Theme selection (edit these variables to swap themes or background)
 local theme = "gruvbox" -- options: "catppuccin", "gruvbox"
@@ -29,52 +30,48 @@ end
 
 vim.keymap.set('n', '<leader>t', toggle_spterminal, { noremap = true, silent = true, desc = 'Toggle Split Terminal' })
 
--- Only load plugins if running in Neovim
-if is_nvim then
-  -- Bootstrap lazy.nvim if not installed
-  local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-  if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
-      "git", "clone", "--filter=blob:none",
-      "https://github.com/folke/lazy.nvim.git", lazypath
-    })
-  end
-  vim.opt.rtp:prepend(lazypath)
-
-  require("lazy").setup({
-    -- Themes
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-    { "morhetz/gruvbox", name = "gruvbox", priority = 1000 },
-    -- Plugins
-    { "nvim-neo-tree/neo-tree.nvim", dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-tree/nvim-web-devicons",
-        "MunifTanjim/nui.nvim"
-      }
-    },
-    { "willothy/nvim-cokeline", dependencies = { "nvim-tree/nvim-web-devicons" } },
-    { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
-    { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
-    { "williamboman/mason.nvim" },
-    { "williamboman/mason-lspconfig.nvim" },
-    { "neovim/nvim-lspconfig" },
+-- Bootstrap lazy.nvim if not installed
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git", "clone", "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git", lazypath
   })
+end
+vim.opt.rtp:prepend(lazypath)
 
-  -- Theme setup
-  if theme == "catppuccin" then
-    vim.opt.background = "dark" -- catppuccin is dark only
-    vim.cmd.colorscheme("catppuccin")
-  elseif theme == "gruvbox" then
-    vim.opt.background = theme_background -- set to "dark" or "light"
-    vim.cmd.colorscheme("gruvbox")
-  end
+require("lazy").setup({
+  -- Themes
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "morhetz/gruvbox", name = "gruvbox", priority = 1000 },
+  -- Plugins
+  { "nvim-neo-tree/neo-tree.nvim", dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim"
+    }
+  },
+  { "willothy/nvim-cokeline", dependencies = { "nvim-tree/nvim-web-devicons" } },
+  { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
+  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+  { "williamboman/mason.nvim" },
+  { "williamboman/mason-lspconfig.nvim" },
+  { "neovim/nvim-lspconfig" },
+})
 
-  -- Plugin configurations
-  require("config.lualine")
-  require("config.cokeline")
-  require("config.neotree")
-  require("config.telescope")
-  require("config.lsp")
+-- Theme setup
+if theme == "catppuccin" then
+  vim.opt.background = "dark" -- catppuccin is dark only
+  vim.cmd.colorscheme("catppuccin")
+elseif theme == "gruvbox" then
+  vim.opt.background = theme_background -- set to "dark" or "light"
+  vim.cmd.colorscheme("gruvbox")
 end
 
--- Vim fallback: no plugin loading, but settings apply
+-- Plugin configurations
+require("config.lualine")
+require("config.cokeline")
+require("config.neotree")
+require("config.telescope")
+require("config.lsp")
+

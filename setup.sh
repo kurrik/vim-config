@@ -10,10 +10,13 @@ mkdir -p "$BACKUP_DIR"
 
 # Backup and symlink Neovim config
 echo "Setting up Neovim configuration..."
-if [ -d "$HOME/.config/nvim" ] || [ -f "$HOME/.config/nvim/init.lua" ]; then
+if [ -d "$HOME/.config/nvim" ] || [ -f "$HOME/.config/nvim/init.lua" ] || [ -L "$HOME/.config/nvim" ]; then
   echo "Backing up existing Neovim config..."
+  mkdir -p "$BACKUP_DIR"
   mv "$HOME/.config/nvim" "$BACKUP_DIR/nvim_$(date +%s)" 2>/dev/null || true
 fi
+
+# Create Neovim config directory and symlink to our config
 mkdir -p "$HOME/.config"
 ln -sfn "$REPO_DIR/nvim" "$HOME/.config/nvim"
 
