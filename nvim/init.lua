@@ -53,7 +53,12 @@ require("lazy").setup({
   },
   { "willothy/nvim-cokeline", dependencies = { "nvim-tree/nvim-web-devicons" } },
   { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
-  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+  { "nvim-telescope/telescope.nvim", dependencies = {
+      "nvim-lua/plenary.nvim",
+      -- Native C sorter: keeps fuzzy filtering instant even on huge file lists
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    }
+  },
   { "williamboman/mason.nvim" },
   { "williamboman/mason-lspconfig.nvim" },
   { "neovim/nvim-lspconfig" },
