@@ -59,6 +59,11 @@ require("lazy").setup({
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     }
   },
+  { "NeogitOrg/neogit", dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim", -- picker integration
+    }
+  },
   { "williamboman/mason.nvim" },
   { "williamboman/mason-lspconfig.nvim" },
   { "neovim/nvim-lspconfig" },
@@ -78,5 +83,6 @@ require("config.lualine")
 require("config.cokeline")
 require("config.neotree")
 require("config.telescope")
+require("config.neogit")
 require("config.lsp")
 
