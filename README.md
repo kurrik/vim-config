@@ -12,6 +12,13 @@
    ./setup.sh
    ```
 
+`setup.sh` is safe to re-run. It installs the required dependencies (`neovim`,
+`fd`, `ripgrep`) automatically on macOS (via Homebrew) and Debian/Ubuntu (via
+`apt`, which may prompt for `sudo`), then symlinks the config. On other
+platforms it skips installation and prints what to install manually. A C
+compiler and `make` are needed to build `telescope-fzf-native`; the script
+warns if they're missing.
+
 ## Theme Selection
 - To change the theme, edit the `theme` variable in `nvim/init.lua` to either `catppuccin` or `gruvbox`.
 
@@ -64,7 +71,7 @@ This will open a terminal buffer where you can run shell commands directly. You 
 
 ## Troubleshooting
 - Backups are stored in `.backup_*` directories in the repo root.
-- If plugins do not load, ensure you are running Neovim >= 0.8 and have an internet connection for lazy.nvim bootstrap.
+- If plugins do not load, ensure you are running Neovim >= 0.11 (required by the LSP setup) and have an internet connection for lazy.nvim bootstrap.
 
 ---
 
