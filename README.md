@@ -23,18 +23,27 @@ warns if they're missing.
 - To change the theme, edit the `theme` variable in `nvim/init.lua` to either `catppuccin` or `gruvbox`.
 
 ## Keybindings
-| Action                       | Keybinding      | Plugin         |
-|------------------------------|-----------------|---------------|
-| Toggle file browser          | `<leader>e`     | Neo-tree      |
-| Fuzzy file search            | `<C-p>`         | Telescope     |
-| Next buffer                  | `:bnext`        | cokeline      |
-| Previous buffer              | `:bprev`        | cokeline      |
-| Close buffer                 | `:bd`           | cokeline      |
-| Horizontal split             | `:sp`           | Core          |
-| Vertical split               | `:vsp`          | Core          |
-| Move between splits          | `<C-w>h/j/k/l`  | Core          |
-| Resize splits                | `<C-w><`, etc.  | Core          |
-| Close split                  | `:q`            | Core          |
+
+The leader key is `Space`.
+
+| Action                          | Keybinding      | Source            |
+|---------------------------------|-----------------|-------------------|
+| Toggle file browser             | `<leader>e`     | Neo-tree          |
+| Fuzzy file search               | `<C-p>`         | Telescope         |
+| Open Git interface (status)     | `<leader>g`     | Neogit            |
+| Toggle split terminal           | `<leader>t`     | Config            |
+| Exit terminal mode (to normal)  | `<Esc>`         | Config (Neovim)   |
+| Next buffer                     | `<Tab>`         | cokeline          |
+| Previous buffer                 | `<S-Tab>`       | cokeline          |
+| Close buffer                    | `:bd`           | Vim built-in      |
+| Horizontal split                | `:sp`           | Vim built-in      |
+| Vertical split                  | `:vsp`          | Vim built-in      |
+| Move between splits             | `<C-w>h/j/k/l`  | Vim built-in      |
+| Resize splits                   | `<C-w><`, etc.  | Vim built-in      |
+| Close split                     | `:q`            | Vim built-in      |
+
+> In plain Vim, `<leader>t` opens a terminal (`:terminal`) and the terminal-mode
+> `<Esc>` mapping is Neovim-only.
 
 ## Defaults
 - Line numbers (absolute/relative)
