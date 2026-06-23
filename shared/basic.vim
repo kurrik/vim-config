@@ -28,18 +28,23 @@ set incsearch
 " UI/UX
 set mouse=a
 set clipboard=unnamedplus
-set spell
+" Spell check is distracting in source code; enable it only for prose
+" filetypes (see the FileType autocmd below) rather than globally.
+set nospell
 set timeoutlen=400
+
+" Enable spell check for prose-oriented filetypes only
+augroup spell_prose
+  autocmd!
+  autocmd FileType text,markdown,html,gitcommit,rst,asciidoc,tex,mail setlocal spell
+augroup END
 
 " Terminal
 if has('nvim')
   " Neovim-specific terminal settings
   nnoremap <leader>t :split \| terminal<CR>
   tnoremap <Esc> <C-\><C-n>
-  " Spell check is noise in a terminal pane (shell output, prompts, etc.)
-  autocmd TermOpen * setlocal nospell
 else
   " Vim-specific terminal settings
   nnoremap <leader>t :terminal<CR>
-  autocmd TerminalOpen * setlocal nospell
 endif
