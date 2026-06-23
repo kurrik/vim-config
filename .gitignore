@@ -1,2 +1,4 @@
 .DS_Store
 .backup_*
+# lazy.nvim plugin lockfile -- not pinned; each machine resolves its own versions
+nvim/lazy-lock.json
