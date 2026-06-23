@@ -69,6 +69,12 @@ require("lazy").setup({
   { "neovim/nvim-lspconfig" },
 })
 
+-- Enable 24-bit color. Required for catppuccin and for gruvbox to render in
+-- true color instead of the degraded 256-color approximation. It also lets
+-- Neovim drive the terminal cursor color from the Cursor highlight group (see
+-- the cursor fix below), which only works with termguicolors on.
+vim.opt.termguicolors = true
+
 -- Theme setup
 if theme == "catppuccin" then
   vim.opt.background = "dark" -- catppuccin is dark only
@@ -77,6 +83,21 @@ elseif theme == "gruvbox" then
   vim.opt.background = theme_background -- set to "dark" or "light"
   vim.cmd.colorscheme("gruvbox")
 end
+
+-- gruvbox's default Cursor is reverse video, which on the light background
+-- renders as a near-invisible pale block. Give it an explicit high-contrast
+-- color per background (dark cursor on light bg, light cursor on dark bg).
+-- Re-applied on ColorScheme so it survives a live theme switch.
+local function fix_gruvbox_cursor()
+  if vim.g.colors_name ~= "gruvbox" then return end
+  if vim.o.background == "light" then
+    vim.api.nvim_set_hl(0, "Cursor", { fg = "#fbf1c7", bg = "#3c3836" })
+  else
+    vim.api.nvim_set_hl(0, "Cursor", { fg = "#282828", bg = "#ebdbb2" })
+  end
+end
+vim.api.nvim_create_autocmd("ColorScheme", { callback = fix_gruvbox_cursor })
+fix_gruvbox_cursor()
 
 -- Plugin configurations
 require("config.lualine")
