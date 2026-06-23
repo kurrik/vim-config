@@ -36,7 +36,10 @@ if has('nvim')
   " Neovim-specific terminal settings
   nnoremap <leader>t :split \| terminal<CR>
   tnoremap <Esc> <C-\><C-n>
+  " Spell check is noise in a terminal pane (shell output, prompts, etc.)
+  autocmd TermOpen * setlocal nospell
 else
   " Vim-specific terminal settings
   nnoremap <leader>t :terminal<CR>
+  autocmd TerminalOpen * setlocal nospell
 endif
