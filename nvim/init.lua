@@ -72,11 +72,17 @@ require("lazy").setup({
   { "williamboman/mason-lspconfig.nvim" },
   { "neovim/nvim-lspconfig" },
   -- Live markdown preview in the browser. The build step downloads the
-  -- prebuilt preview server, so no Node/yarn toolchain is required.
+  -- prebuilt preview server, so no Node/yarn toolchain is required. We force
+  -- the plugin to load first: lazy.nvim runs `build` before the plugin's
+  -- autoload files are sourced, so mkdp#util#install would otherwise raise
+  -- E117 (unknown function).
   { "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
     ft = { "markdown" },
-    build = function() vim.fn["mkdp#util#install"]() end,
+    build = function()
+      vim.cmd("Lazy load markdown-preview.nvim")
+      vim.fn["mkdp#util#install"]()
+    end,
   },
 })
 
