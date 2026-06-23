@@ -32,6 +32,7 @@ The leader key is `Space`.
 | Fuzzy file search               | `<C-p>`         | Telescope         |
 | Open Git interface (status)     | `<leader>g`     | Neogit            |
 | Toggle split terminal           | `<leader>t`     | Config            |
+| Toggle markdown preview         | `<leader>m`     | markdown-preview  |
 | Exit terminal mode (to normal)  | `<Esc>`         | Config (Neovim)   |
 | Next buffer                     | `<Tab>`         | cokeline          |
 | Previous buffer                 | `<S-Tab>`       | cokeline          |
