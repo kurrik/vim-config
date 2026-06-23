@@ -84,19 +84,33 @@ elseif theme == "gruvbox" then
   vim.cmd.colorscheme("gruvbox")
 end
 
--- gruvbox's default Cursor is reverse video, which on the light background
--- renders as a near-invisible pale block. Give it an explicit high-contrast
--- color per background (dark cursor on light bg, light cursor on dark bg).
--- Re-applied on ColorScheme so it survives a live theme switch.
-local function fix_gruvbox_cursor()
-  if vim.g.colors_name ~= "gruvbox" then return end
+-- gruvbox's default Cursor is reverse video, which renders as a near-invisible
+-- pale block on the light background -- made worse when the terminal itself
+-- uses a dark theme (its light cursor bleeds through nvim's light background).
+-- Fix in two parts:
+--   1. Set the Cursor highlight to an explicit high-contrast color per
+--      background (dark block on light bg, light block on dark bg).
+--   2. Push that color to the terminal with an OSC 12 escape. Neovim only emits
+--      this automatically when the terminfo advertises the capability (many
+--      $TERM values, e.g. xterm-256color, do not), so send it explicitly. OSC
+--      112 on exit restores the terminal's own cursor so the shell keeps it.
+local function gruvbox_cursor_color()
   if vim.o.background == "light" then
-    vim.api.nvim_set_hl(0, "Cursor", { fg = "#fbf1c7", bg = "#3c3836" })
+    return { block = "#3c3836", glyph = "#fbf1c7" }
   else
-    vim.api.nvim_set_hl(0, "Cursor", { fg = "#282828", bg = "#ebdbb2" })
+    return { block = "#ebdbb2", glyph = "#282828" }
   end
 end
-vim.api.nvim_create_autocmd("ColorScheme", { callback = fix_gruvbox_cursor })
+local function fix_gruvbox_cursor()
+  if vim.g.colors_name ~= "gruvbox" then return end
+  local c = gruvbox_cursor_color()
+  vim.api.nvim_set_hl(0, "Cursor", { fg = c.glyph, bg = c.block })
+  io.write("\027]12;" .. c.block .. "\007")
+end
+vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, { callback = fix_gruvbox_cursor })
+vim.api.nvim_create_autocmd("VimLeave", { callback = function()
+  io.write("\027]112\007")
+end })
 fix_gruvbox_cursor()
 
 -- Plugin configurations
