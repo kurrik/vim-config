@@ -30,6 +30,10 @@ end
 
 vim.keymap.set('n', '<leader>t', toggle_spterminal, { noremap = true, silent = true, desc = 'Toggle Split Terminal' })
 
+-- <leader>m: toggle the browser markdown preview (markdown-preview.nvim). The
+-- command triggers the plugin's lazy load, so the binding works on first use.
+vim.keymap.set('n', '<leader>m', '<cmd>MarkdownPreviewToggle<cr>', { noremap = true, silent = true, desc = 'Toggle Markdown Preview' })
+
 -- Bootstrap lazy.nvim if not installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -67,6 +71,13 @@ require("lazy").setup({
   { "williamboman/mason.nvim" },
   { "williamboman/mason-lspconfig.nvim" },
   { "neovim/nvim-lspconfig" },
+  -- Live markdown preview in the browser. The build step downloads the
+  -- prebuilt preview server, so no Node/yarn toolchain is required.
+  { "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
+    ft = { "markdown" },
+    build = function() vim.fn["mkdp#util#install"]() end,
+  },
 })
 
 -- Enable 24-bit color. Required for catppuccin and for gruvbox to render in
