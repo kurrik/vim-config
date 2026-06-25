@@ -14,6 +14,11 @@ vim.keymap.set('n', '<leader>e', function()
   vim.cmd('Neotree toggle')
 end, { desc = 'Toggle Neo-tree file browser' })
 
+-- Global keymap to reveal the current file in Neo-tree with <leader>E
+vim.keymap.set('n', '<leader>E', function()
+  vim.cmd('Neotree reveal')
+end, { desc = 'Reveal current file in Neo-tree' })
+
 -- Auto-quit Neovim if Neo-tree is the last window
 vim.api.nvim_create_autocmd('BufEnter', {
   group = vim.api.nvim_create_augroup('NeoTreeAutoQuit', { clear = true }),
