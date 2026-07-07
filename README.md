@@ -29,6 +29,7 @@ The leader key is `Space`.
 | Action                          | Keybinding      | Source            |
 |---------------------------------|-----------------|-------------------|
 | Toggle file browser             | `<leader>e`     | Neo-tree          |
+| Reveal current file in browser  | `<leader>E`     | Neo-tree          |
 | Fuzzy file search               | `<C-p>`         | Telescope         |
 | Open Git interface (status)     | `<leader>g`     | Neogit            |
 | Toggle split terminal           | `<leader>t`     | Config            |
