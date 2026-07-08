@@ -30,7 +30,9 @@ The leader key is `Space`.
 |---------------------------------|-----------------|-------------------|
 | Toggle file browser             | `<leader>e`     | Neo-tree          |
 | Reveal current file in browser  | `<leader>E`     | Neo-tree          |
-| Fuzzy file search               | `<C-p>`         | Telescope         |
+| Fuzzy file search               | `<leader>p`     | Telescope         |
+| Find in files (live grep)       | `<leader>f`     | Telescope         |
+| Copy relative file path         | `<leader>y`     | Config            |
 | Open Git interface (status)     | `<leader>g`     | Neogit            |
 | Toggle split terminal           | `<leader>t`     | Config            |
 | Toggle markdown preview         | `<leader>m`     | markdown-preview  |

@@ -29,5 +29,8 @@ telescope.setup{
 -- Load the native C sorter so filtering stays instant on large lists.
 pcall(telescope.load_extension, 'fzf')
 
--- Keymap for VSCode-like quick file open
-vim.keymap.set('n', '<C-p>', require('telescope.builtin').find_files, { desc = 'Find Files (Telescope)' })
+-- Quick file open by name
+vim.keymap.set('n', '<leader>p', require('telescope.builtin').find_files, { desc = 'Find Files (Telescope)' })
+
+-- Find in files: ripgrep-backed search-as-you-type across the project
+vim.keymap.set('n', '<leader>f', require('telescope.builtin').live_grep, { desc = 'Find in Files (Telescope)' })
