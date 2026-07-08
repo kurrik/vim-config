@@ -30,9 +30,14 @@ end
 
 vim.keymap.set('n', '<leader>t', toggle_spterminal, { noremap = true, silent = true, desc = 'Toggle Split Terminal' })
 
--- <leader>m: toggle the browser markdown preview (markdown-preview.nvim). The
+-- <leader>m: open the browser markdown preview (markdown-preview.nvim). The
 -- command triggers the plugin's lazy load, so the binding works on first use.
-vim.keymap.set('n', '<leader>m', '<cmd>MarkdownPreviewToggle<cr>', { noremap = true, silent = true, desc = 'Toggle Markdown Preview' })
+-- Always opens (never toggles): MarkdownPreviewToggle tracks open/closed state
+-- in a buffer-local flag that goes stale whenever the preview closes outside
+-- the toggle (browser tab closed, auto-close, server exit), which made the
+-- first press a silent no-op "stop". With mkdp_combine_preview set below, an
+-- already-open preview tab is reused instead of spawning a duplicate.
+vim.keymap.set('n', '<leader>m', '<cmd>MarkdownPreview<cr>', { noremap = true, silent = true, desc = 'Open Markdown Preview' })
 
 -- Bootstrap lazy.nvim if not installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -79,6 +84,16 @@ require("lazy").setup({
   { "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
     ft = { "markdown" },
+    init = function()
+      -- Reuse a single browser tab: when a preview page is already connected,
+      -- the server retargets it (change_bufnr) instead of opening a new tab,
+      -- and entering another markdown buffer refreshes that same tab. Keep the
+      -- tab alive across buffer switches so there is a tab to reuse. These
+      -- globals are read when the plugin file is sourced, so they must be set
+      -- here (init runs at startup) rather than after the lazy load.
+      vim.g.mkdp_combine_preview = 1
+      vim.g.mkdp_auto_close = 0
+    end,
     build = function()
       vim.cmd("Lazy load markdown-preview.nvim")
       vim.fn["mkdp#util#install"]()
