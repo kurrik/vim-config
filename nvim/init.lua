@@ -34,6 +34,17 @@ vim.keymap.set('n', '<leader>t', toggle_spterminal, { noremap = true, silent = t
 -- command triggers the plugin's lazy load, so the binding works on first use.
 vim.keymap.set('n', '<leader>m', '<cmd>MarkdownPreviewToggle<cr>', { noremap = true, silent = true, desc = 'Toggle Markdown Preview' })
 
+-- <leader>y: copy the current file's path (relative to cwd) to the clipboard
+vim.keymap.set('n', '<leader>y', function()
+  local path = vim.fn.expand('%:.')
+  if path == '' then
+    vim.notify('No file name', vim.log.levels.WARN)
+    return
+  end
+  vim.fn.setreg('+', path)
+  vim.notify('Copied: ' .. path)
+end, { noremap = true, silent = true, desc = 'Copy Relative File Path' })
+
 -- Bootstrap lazy.nvim if not installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
