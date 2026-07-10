@@ -71,6 +71,10 @@ Commands run inside the terminal that open an editor (e.g. `git commit`) do not
 start a nested Neovim instance: flatten.nvim opens the file in the surrounding
 instance instead, and the command resumes once you write and close that buffer
 (`:wq`).
+
+This only works when the command launches `nvim`, not plain `vim` — on macOS
+git's default editor (`vi`) is real Vim, which flatten.nvim cannot intercept.
+Make sure git uses Neovim: `git config --global core.editor nvim`.
 - Always show signcolumn
 - Show matching parentheses
 - Auto-read changed files
