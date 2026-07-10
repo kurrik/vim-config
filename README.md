@@ -66,6 +66,11 @@ Neovim includes a built-in terminal emulator. To open a terminal window within y
 ```
 
 This will open a terminal buffer where you can run shell commands directly. You can open multiple terminal buffers as needed. To return to normal mode from the terminal, press `<C-\><C-n>`.
+
+Commands run inside the terminal that open an editor (e.g. `git commit`) do not
+start a nested Neovim instance: flatten.nvim opens the file in the surrounding
+instance instead, and the command resumes once you write and close that buffer
+(`:wq`).
 - Always show signcolumn
 - Show matching parentheses
 - Auto-read changed files

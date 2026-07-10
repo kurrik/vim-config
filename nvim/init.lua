@@ -45,6 +45,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  -- Opens files from nested nvim instances (e.g. git commit inside :terminal)
+  -- in this instance instead, blocking the caller until the buffer is closed.
+  -- Must not be lazy-loaded: it has to intercept the nested instance at startup.
+  { "willothy/flatten.nvim", config = true, lazy = false, priority = 1001 },
   -- Themes
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   { "morhetz/gruvbox", name = "gruvbox", priority = 1000 },
