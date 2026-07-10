@@ -10,6 +10,13 @@ vim.cmd('source ~/workspace/vim-config/shared/basic.vim')
 local theme = "gruvbox" -- options: "catppuccin", "gruvbox"
 local theme_background = "light" -- options: "dark", "light" (only applies to gruvbox)
 
+-- Shells spawned by :terminal inherit nvim's environment, so this makes git
+-- (and anything else consulting EDITOR) launch nvim inside the embedded
+-- terminal regardless of the machine's git config or shell profile. That
+-- editor must be nvim for flatten.nvim to redirect it to this instance.
+vim.env.EDITOR = "nvim"
+vim.env.GIT_EDITOR = "nvim"
+
 -- :Spterminal - split window and open terminal in bottom split
 vim.api.nvim_create_user_command('Spterminal', function()
   vim.cmd('split')
