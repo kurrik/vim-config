@@ -23,6 +23,23 @@ if vim.g.colors_name == "gruvbox" then
   end
 end
 
+-- Neogit's status buffer registers decoration providers whose `on_win` callback
+-- clears an entire buffer namespace (`nvim_buf_clear_namespace(buf, ns, 0, -1)`)
+-- and rebuilds it. `on_win` runs on every window redraw, so on a large status
+-- buffer each redraw tears down and re-adds every ranged extmark. Neovim's
+-- marktree spends that work in `unintersect_node`, which scales worse than
+-- linearly, and the editor stops keeping up: nvim pegs one core and no longer
+-- responds to SIGTERM. Leaving the status buffer open is what triggers it,
+-- because the filewatcher re-renders on every `.git` change -- constant in a
+-- monorepo with background test fixtures.
+--
+-- These three settings drop two of the three providers and stop the idle
+-- re-render. `active_item_highlight` is hardcoded on for the status buffer, so
+-- this reduces the exposure rather than removing it.
+opts.disable_context_highlighting = true
+opts.disable_signs = true
+opts.filewatcher = { enabled = false }
+
 require('neogit').setup(opts)
 
 -- <leader>g: open the Neogit status buffer
